@@ -1,0 +1,1006 @@
+  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+    <link rel="stylesheet" href="jquery.treeview.css" />
+    <link href="navbar-fixed-top.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link rel="icon" href="../../favicon.ico">
+    
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"></script>-->
+<!--	<script src="jquery.treeview.js"></script>
+	<script type="text/javascript" src="demo.js"></script>-->
+    <script language="javascript">
+	 var a= true;
+function disparition(maligne) { 
+	 if (a== true){
+ document.getElementById(maligne).style.display="block";
+ a=false;
+	 }else{
+ document.getElementById(maligne).style.display="none";
+  a=true;
+} }
+function charger()
+{
+
+  document.form1.submit();
+  document.form1.valide.value = "true"; 
+  document.form1.wil.value = "true"; 
+ // document.getElementById(cher).value;
+}
+function control()
+{
+	
+	 if (document.form1.nom_pharm.value=="") 
+				   {
+				     alert ("Champs Nom du pharmacien ne doit pas etre nul ");
+				     document.form1.nom_pharm.focus();
+				     return false;
+				   }}
+	
+  /*      function visibilite(thingId)		// Fonction afficher/masquer ul li
+        {
+            var targetElement;
+            targetElement = document.getElementById(thingId) ;
+            if (targetElement.style.display == "none")
+            {
+                targetElement.style.display = "" ;
+            } else {
+                targetElement.style.display = "none" ;
+            }
+        }*/
+function groupe(){
+	var x= document.gro.groupe.value;
+	return(location.href='accueil.php?gr='+x);
+	}
+function groupe_w(wilaya){
+	var x= document.gro.groupe.value;
+	if (wilaya <10)
+		var y= '0'+wilaya;
+	else
+		var y= wilaya;
+	return(location.href='accueil.php?id='+y+'&&gr='+x);
+	}		
+function groupe_c(wilaya, commune){
+	var x= document.gro.groupe.value;
+	if (wilaya <10)
+		var y= '0'+wilaya;
+	else
+		var y= wilaya;
+		
+	if (commune <10)
+		var z= '0'+commune;
+	else
+		var z= commune;
+	return(location.href='accueil.php?id='+y+'&&ref='+z+'&&gr='+x);
+	}	
+function groupe_n(){
+	var x= document.gro.groupe.value;
+	return(location.href='accueil.php?nat=national&&gr='+x);
+	}	
+	
+function change()
+{
+	
+  document.form1.wil.value = "true"; 
+document.form1.submit();
+
+}
+function cocheToute(){
+   var taille = document.forms['form1'].elements.length;
+   var element = null;
+   for(i=0; i < taille; i++){
+      element = document.forms['form1'].elements[i];
+      if(element.type == "checkbox")
+         element.checked = true;
+   }
+      
+}
+
+
+function decocheToute(){
+   var taille = document.forms['form1'].elements.length;
+   var element = null;
+   for(i=0; i < taille; i++){
+      element = document.forms['form1'].elements[i];
+      if(element.type == "checkbox")
+         element.checked = false;
+   }
+      
+}
+	</script>
+    
+<title>Garde des officines</title>
+<style>
+#tabscrol { 
+min-height:400px;
+height:400px;/*pour IE qui comprend rien, et qui ne reconnait pas min-height, mais qui comprend mal height*/
+/*min-width:60px;
+/*width:60px;/*pour IE qui comprend rien*/
+overflow:auto;/*pour activer les scrollbarres*/
+
+}
+body{
+	margin-left:0px;
+	margin-bottom:0px
+	margin-right:0px;
+	margin-top:0px;
+	}
+
+#Header_up{
+	height:170px;
+	background-color:#FFF;
+	}
+#Header1{
+	height:90px;
+	background-color:#006600;
+	color:#FFF;
+	margin-top:0px;
+	text-align:center;
+	font-size:25px;
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+		}
+#Header{
+	height:30px;
+	background-color:#640000;
+	color:#FFF;
+	margin-top:0px;
+	border-bottom-color:#999;
+	text-align:center;
+	font-size:15px;
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+	/*border-radius:20px 20px 20px 20px;*/
+		}
+
+#Manu{
+	margin-top:10px;
+	height:40px;
+	background-color:#FFF;
+	margin-left:280px;
+	margin-right:auto;
+	
+	}
+#Manu_2{
+	height:40px;
+	background-color:#FFF;
+	margin-left:100px;
+	margin-right:auto;
+	margin-top:0px;
+	
+	}
+#combo{
+	margin-left:0px;
+	background-color:#FFF;
+	height:40px;
+	float:left;}
+
+#SideBar{
+	width:200px;
+	height:550px;
+	background-color:#FFF;
+	float:left;
+	margin-top:10px;
+	margin-right:0px
+	}
+	
+#MainBody_up{
+	width:1000px;
+	height:auto;
+	background-color:#FFF;
+	float:right;
+	margin-top:20px;
+/*	border-width:1px;
+	border-style:solid;
+	border-color:#00FF00;	*/
+	}	
+#MainBody{
+	width:1000px;
+	height:auto;
+	background-color:#FFF;
+	float:right;
+	margin-left:1px
+	
+	}
+table{
+	border-collapse:collapse;
+	border-width:1px;
+	border-style:solid;
+	border-color:#0C0;
+	border-width:medium;
+	font-size:12px;
+	
+	}
+table th{
+	text-align:center;
+	color:#FFF;
+	background-color:#005B00;
+    padding: 4px 18px 4px 8px;
+}
+table td{
+	border:1px solid #e3e3e3;
+	padding:4px 8px ;
+	background-color:#eeefe0;
+	}
+tr:nth-child(even) td{
+	background-color:#FFF;
+	}
+#titre{
+	margin-left:180px;
+	float:left;
+	}
+#nom{
+	float:left;
+	font-size:14px;
+	margin-top:5px;
+	}
+#con{
+	float:left;
+	color:#640000;
+	font-size:15px;
+	}
+#men{
+
+	margin-top:0px;
+	float:right;
+}
+#men ul{
+	list-style:none;
+	height:20px;
+	
+	
+	}
+#men ul li{
+	
+	border:1px solid #CCC;
+	width:165px;
+	height:27px;
+	text-align:center;
+	float:right;
+	font-size:14px;
+	border-left-color:#640000;
+	border-bottom-color:#640000;
+	border-top-color:#640000;
+	margin-top:4px;
+	}
+#men ul li a{
+	color:#FFF;
+	display:block;
+	}
+#men ul li a:hover{
+	background-color:#970000;
+	display:block;
+	}
+#overlay{
+    display: none;
+    position: fixed;
+    top:0; right:0; bottom:0; left:0;
+    background-color: grey;
+    opacity: 0.9;
+    z-index: 1000;
+	
+}
+#overlay:target{
+    display:block;
+	
+}
+#overlay a{
+    font-weight:600;
+    padding: 10px 30px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+#overlay form{
+    font-weight:600;
+    padding: 100px 100px;
+    background-color: white;
+    position:absolute;
+    top: 30%;
+    left: 40%;
+}
+#overlay3{
+    display: none;
+    position: fixed;
+    top:0; right:0; bottom:0; left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+#overlay3:target{
+    display: block;
+}
+.popup_block{
+    background: #fff;
+    padding: 20px;
+    border: 20px solid #ddd;
+    position: relative;
+    margin: 10% auto;
+    width: 40%;
+    box-shadow: 0px 0px 20px #000;
+    border-radius: 10px;
+}
+img.btn_close {
+    float: right;
+    margin: -55px -55px 0 0;
+}
+
+</style>
+</head>
+
+<body>
+<div id="Header_up">
+<div id="Header1">
+	
+    <div id="titre" align="center">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minist&egrave;re de la Sant&eacute;, de la Population et de la Reforme Hospitali&egrave;re</br>Liste des gardes des officines pharmaceutiques
+    </div>
+    
+
+</div>
+
+<div id="Header">
+
+   
+
+</div>
+<!--<div id="Manu" align="center">-->
+            
+        
+	
+
+    <form id="form1" name="form1" method="post" action="">
+  
+  
+   <fieldset class="fieldset1">
+					<LEGEND align="left"  class="Style92 Style98 "></LEGEND>
+					<table width="100%" border="0">
+                      <tr>
+                       
+                        <td width="90%" class="Style91" align="center">Choisissez votre wilaya
+                        <select name='wilay2' id='wilay2'   onChange='change()'><option value='0' selected >  --  Wilaya  --</option><option value='01'> ADRAR</option><option value='02'> CHLEF</option><option value='03'> LAGHOUAT</option><option value='04' selected>OUM EL BOUAGHI</option><option value='05'> BATNA</option><option value='06'> BEJAIA</option><option value='07'> BISKRA</option><option value='08'> BECHAR</option><option value='09'> BLIDA</option><option value='10'> BOUIRA</option><option value='11'> TAMANRASSET</option><option value='12'> TEBESSA</option><option value='13'> TLEMCEN</option><option value='14'> TIARET</option><option value='15'> TIZI OUZOU</option><option value='16'> ALGER</option><option value='17'> DJELFA</option><option value='18'> JIJEL</option><option value='19'> SETIF</option><option value='20'> SAIDA</option><option value='21'> SKIKDA</option><option value='22'> SIDI BEL ABBES</option><option value='23'> ANNABA</option><option value='24'> GUELMA</option><option value='25'> CONSTANTINE</option><option value='26'> MEDEA</option><option value='27'> MOSTAGANEM</option><option value='28'> M'SILA</option><option value='29'> MASCARA</option><option value='30'> OUARGLA</option><option value='31'> ORAN</option><option value='32'> EL BAYADH</option><option value='33'> ILLIZI</option><option value='34'> BORDJ BOU ARRERIDJ</option><option value='35'> BOUMERDES</option><option value='36'> EL TARF</option><option value='37'> TINDOUF</option><option value='38'> TISSEMSILT</option><option value='39'> EL OUED</option><option value='40'> KHENCHELA</option><option value='41'> SOUK AHRAS</option><option value='42'> TIPAZA</option><option value='43'> MILA</option><option value='44'> AIN DEFLA</option><option value='45'> NAAMA</option><option value='46'> AIN TEMOUCHENT</option><option value='47'> GHARDAIA</option><option value='48'> RELIZANE</option></select>                         
+                         <input name="valide" type="hidden" id="valide" value="false" />
+                          <input name="wil" type="hidden" id="wil" value="false" />
+                         </td>
+                      </tr>
+                      <tr>
+                      
+               
+                      </tr>
+                      
+						</table>
+					
+					</fieldset>
+        
+
+
+   
+   <table>
+    <tr>
+    <td width="20%"><div id='tabscrol'><table id='insured_list'   ><thead>
+	   <tr>
+	   <a href="javascript:cocheToute();">TOUT COCHER</a> <a href="javascript:decocheToute();">  /  DECOCHER</a>
+	   </tr>
+                <tr >
+				 <th valign=\"top\" ></th>
+				
+                  <th valign=\"top\" >Choisissez vos communes</th>
+
+              
+              
+				  
+				 
+				  
+                </tr>
+              </thead><tbody><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0401 checked="checked"></td>
+    <td valign="top"  >OUM EL BOUAGHI&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0402 ></td>
+    <td valign="top"  >AIN BEIDA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0403 ></td>
+    <td valign="top"  >AIN M\'LILA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0404 ></td>
+    <td valign="top"  >BEHIR CHERGUI&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0405 ></td>
+    <td valign="top"  >EL AMIRIA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0406 ></td>
+    <td valign="top"  >SIGUS&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0407 ></td>
+    <td valign="top"  >EL BELALA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0408 ></td>
+    <td valign="top"  >AIN BACHOUCHE&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0409 ></td>
+    <td valign="top"  >BERRICHE&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0410 ></td>
+    <td valign="top"  >OULED HAMLA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0411 ></td>
+    <td valign="top"  >DHALA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0412 ></td>
+    <td valign="top"  >AIN KERCHA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0413 ></td>
+    <td valign="top"  >HANCHIR TOUMGHANI&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0414 ></td>
+    <td valign="top"  >EL DJAZIA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0415 ></td>
+    <td valign="top"  >AIN DISS&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0416 ></td>
+    <td valign="top"  >FKIRINA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0417 ></td>
+    <td valign="top"  >SOUK NAAMANE&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0418 ></td>
+    <td valign="top"  >ZORG&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0419 ></td>
+    <td valign="top"  >EL FEDJOUDJ BOUGHRARA S.&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0420 ></td>
+    <td valign="top"  >OULED ZOUAI&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0421 ></td>
+    <td valign="top"  >BIR CHOUHADA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0422 ></td>
+    <td valign="top"  >KSAR SBAHI&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0423 ></td>
+    <td valign="top"  >OUED NINI&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0424 ></td>
+    <td valign="top"  >MESKIANA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0425 ></td>
+    <td valign="top"  >AIN FAKROUN&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0426 ></td>
+    <td valign="top"  >RAHIA&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0427 ></td>
+    <td valign="top"  >AIN ZITOUN&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0428 ></td>
+    <td valign="top"  >OULED GACEM&nbsp;</td>
+
+
+	</tr><tr ><td valign="top" ><input type="checkbox" name="options[]" value=0429 ></td>
+    <td valign="top"  >EL HARMILIA&nbsp;</td>
+
+
+	</tr>
+</tbody></table></div>
+
+</td>
+<td width="5" >  <input class="btn btn-default" type="submit" value="Valider" onClick="javascript:charger()">
+  
+</td>
+<td width="75%">
+<!--///////////////////////////////
+-->
+
+  <P>GARDE DE PHARMACIE DE VOTRE CHOIX</p>
+ 
+ <div id='tabscrol'><table id='insured_list'   ><thead>
+	   
+                <tr >
+				  <th valign=\"top\" >Date garde</th>
+			
+				  <th valign=\"top\" >Heure </th>
+				  
+				  <th valign=\"top\">Commune</th>
+				 <th valign=\"top\" >Nom et prénom pharmacien</th>
+				
+    
+                  <th valign=\"top\">Adresse</th>
+                
+				  
+
+              
+              
+				  
+				 
+				  
+                </tr>
+              </thead><tbody><tr >
+
+    <td valign="top"  >29-03-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Guerram           Mohamed&nbsp;</td>
+
+     
+	 <td valign="top"  >Zone n�02 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >30-03-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Allaoua             Adel&nbsp;</td>
+
+     
+	 <td valign="top"  >Lotissement malki (cit� sa�da &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >31-03-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Chorfi   Chirif &nbsp;</td>
+
+     
+	 <td valign="top"  >cit� 100 logts social participatif&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >01-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >SABRI ABDELAALI&nbsp;</td>
+
+     
+	 <td valign="top"  >oum el bouaghi&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >02-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >DJOUANI SAMIRA&nbsp;</td>
+
+     
+	 <td valign="top"  >CITE 01 NOVOMBRE 1985&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >02-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Lamri                   Linda &nbsp;</td>
+
+     
+	 <td valign="top"  >Lotis50 Logts Participatif Et Lotissement El Afri &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >02-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Mamouni     Souad&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite 400 logts n�25-26 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >03-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Bendelmi        Linda&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite de la gare &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >04-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Tounsi   Nee Boukra   Ouarda&nbsp;</td>
+
+     
+	 <td valign="top"  >Zone N� 02&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >05-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Ferrah             Amel&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite El houria &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >06-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >HAMZA RIM YASMINA&nbsp;</td>
+
+     
+	 <td valign="top"  >OUM EL BOUAGHI&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >07-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Bendjam  Khedidja &nbsp;</td>
+
+     
+	 <td valign="top"  >Cit� Bouaziz saidi a proximit� cit� Universitaire filles +500 logts &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >08-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Bendelmi        Linda&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite de la gare &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >09-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Benabes   Nee   Djebaili          Hadda&nbsp;</td>
+
+     
+	 <td valign="top"  >Rue Mostefa Ben boulaid &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >09-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >CHOUCHANE SARA&nbsp;</td>
+
+     
+	 <td valign="top"  >el saada (9) et (9 A) Rez de chaussee Oum el bouaghi&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >09-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Chaabane         Hassina&nbsp;</td>
+
+     
+	 <td valign="top"  >Cit�  tagouft &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >10-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Adnane  Houcine Houcine&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite El adhoua&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >11-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Ait kaki       Mahmoud&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite  Annasr N� 107-108&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >12-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Sahbi        Khaled&nbsp;</td>
+
+     
+	 <td valign="top"  >Complexe Baghou A/Hamid&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >13-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >TOUNSI ABDESSALEM&nbsp;</td>
+
+     
+	 <td valign="top"  >LOTISSEMENT EL MOSTAKBEL &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >14-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >KALLI  OUIDAD&nbsp;</td>
+
+     
+	 <td valign="top"  >80 logement participatife  nouvelle ville&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >15-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >DEIF ABEDEL MOUMEN&nbsp;</td>
+
+     
+	 <td valign="top"  >107 rue abed allawa&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >16-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Adnane  Houcine Houcine&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite El adhoua&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >16-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Mazbach         Wafa &nbsp;</td>
+
+     
+	 <td valign="top"  >lotisssement El Kamin N� 07 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >16-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >BOUCHAMA MED FAROUK&nbsp;</td>
+
+     
+	 <td valign="top"  >CITE ADMINISTRATIF N=�106 OEB&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >17-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >MERABET NAWEL&nbsp;</td>
+
+     
+	 <td valign="top"  >lotissement el jahfa n=�189&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >18-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Mazbach         Wafa &nbsp;</td>
+
+     
+	 <td valign="top"  >lotisssement El Kamin N� 07 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >19-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >DJOUANI SAMIRA&nbsp;</td>
+
+     
+	 <td valign="top"  >OUM EL BOUAGHI&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >20-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >CHOUCHANE SARA&nbsp;</td>
+
+     
+	 <td valign="top"  >el saada (9) et (9 A) Rez de chaussee Oum el bouaghi&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >21-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Guerram           Mohamed&nbsp;</td>
+
+     
+	 <td valign="top"  >Zone n�02 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >22-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Allaoua             Adel&nbsp;</td>
+
+     
+	 <td valign="top"  >Lotissement malki (cit� sa�da &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >23-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Mamouni     Souad&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite 400 logts n�25-26 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >23-04-2021&nbsp;</td>
+	<td valign="top"  >08:00-19:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Tounsi   Nee Boukra   Ouarda&nbsp;</td>
+
+     
+	 <td valign="top"  >Zone N� 02&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >23-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Chorfi   Chirif &nbsp;</td>
+
+     
+	 <td valign="top"  >cit� 100 logts social participatif&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >24-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >SABRI ABDELAALI&nbsp;</td>
+
+     
+	 <td valign="top"  >oum el bouaghi&nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >25-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Mamouni     Souad&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite 400 logts n�25-26 &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >26-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Bendelmi        Linda&nbsp;</td>
+
+     
+	 <td valign="top"  >Cite de la gare &nbsp;</td>
+	
+
+	</tr><tr >
+
+    <td valign="top"  >27-04-2021&nbsp;</td>
+	<td valign="top"  >19:00-08:00&nbsp;</td>
+	<td valign="top"  >OUM EL BOUAGHI&nbsp;</td>  
+    <td valign="top"  >Tounsi   Nee Boukra   Ouarda&nbsp;</td>
+
+     
+	 <td valign="top"  >Zone N� 02&nbsp;</td>
+	
+
+	</tr>
+</tbody></table></div>
+
+</td>
+</tr>
+</table>
+           
+        
+
+     
+
+
+
+<!--
+ <div class="input-group" align="center">
+ <p> salut</p>
+ </div>-->
+  
+    
+  </form>
+  
+  
+
+<!-- /input-group -->
+<!-- /.col-lg-6 -->
+
+
+
+<div id="Manu_2">
+
+<div class="btn-group">
+  
+
+</div>
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="ie10-viewport-bug-workaround.js"></script>-->
+</body>
+</html>
