@@ -84,7 +84,7 @@ const getPharms = async (wilaya, townZipCode) => {
 const generate = async () => {
     let tree = {};
     const provinces = await getProvinces();
-    for (let idx = 39; idx < provinces.length; idx++) {
+    for (let idx = 0; idx < provinces.length; idx++) {
         tree = JSON.parse(await fs.readFile("./data.json"));
         const name = provinces[idx];
         const index = idx < 10 ? `0${idx+1}` : `${idx+1}`
